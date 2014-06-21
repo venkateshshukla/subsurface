@@ -764,7 +764,32 @@ const char *do_libdivecomputer_import(device_data_t *data)
 	}
 
 	err = translate("gettextFromC", "Unable to open %s %s (%s)");
+#ifndef USE_USB_FD
 	rc = dc_device_open(&data->device, data->context, data->descriptor, data->devname);
+#else
+	int fd = get_usb_fd();
+	if (fd < 0) {
+		switch (fd) {
+		case -1:
+			err = translate("gettextFromC", "No USB device available.");
+			break;
+		case -2:
+			err = translate("gettextFromC", "No ftdi device found.");
+			break;
+		case -3:
+			err = translate("gettextFromC", "Not permitted to use USB device. Try reconnecting.");
+			break;
+		case -4:
+			err = translate("gettextFromC", "Error while opening USB device.");
+			break;
+		default:
+			err = translate("gettextFromC", "Unknown error while extracting file descriptor.");
+		}
+		return err;
+	}
+	rc = dc_device_open(&data->device, data->context, data->descriptor,(const void *) &fd);
+#endif // USE_USB_FD
+
 	if (rc == DC_STATUS_SUCCESS) {
 		err = do_device_import(data);
 		/* TODO: Show the logfile to the user on error. */

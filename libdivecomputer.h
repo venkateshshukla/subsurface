@@ -30,6 +30,9 @@ typedef struct device_data_t
 	FILE *libdc_logfile;
 } device_data_t;
 
+#ifdef __ANDROID__
+extern int get_usb_fd();
+#endif
 const char *do_libdivecomputer_import(device_data_t *data);
 const char *do_uemis_import(const char *mountpath, short force_download);
 
