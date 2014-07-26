@@ -21,10 +21,12 @@ void subsurface_user_info(struct user_info *user)
 	const char *username = getenv("USER");
 
 	if (pwd) {
+#if 0
 		if (pwd->pw_gecos && *pwd->pw_gecos)
 			user->name = pwd->pw_gecos;
 		if (!username)
 			username = pwd->pw_name;
+#endif
 	}
 	if (username && *username) {
 		char hostname[64];

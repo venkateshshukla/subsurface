@@ -2,15 +2,16 @@ CODECFORTR = UTF-8
 CODECFORSRC = UTF-8
 include(subsurface-configure.pri)
 
-QT = core gui network svg concurrent
-lessThan(QT_MAJOR_VERSION, 5) {
-	QT += webkit
-} else {
-	!android: QT += webkitwidgets webkit
-	android: QT += androidextras
-}
-INCLUDEPATH += qt-ui $$PWD
-DEPENDPATH += qt-ui
+#QT = core gui network svg concurrent
+#lessThan(QT_MAJOR_VERSION, 5) {
+#	QT += webkit
+#} else {
+#	!android: QT += webkitwidgets webkit
+#	android: QT += androidextras
+#}
+#INCLUDEPATH += qt-ui $$PWD
+#DEPENDPATH += qt-ui
+QT -= core gui
 
 mac: TARGET = Subsurface
 else: TARGET = subsurface
@@ -30,69 +31,69 @@ HEADERS = \
 	helpers.h \
 	libdivecomputer.h \
 	planner.h \
-	save-html.h \
-	worldmap-save.h \
-	worldmap-options.h \
+#	save-html.h \
+#	worldmap-save.h \
+#	worldmap-options.h \
 	pref.h \
 	profile.h \
 	qt-gui.h \
 	qthelper.h \
 	units.h \
 	divecomputer.h \
-	qt-ui/about.h \
-	qt-ui/completionmodels.h \
-	qt-ui/divecomputermanagementdialog.h \
-	qt-ui/divelistview.h \
-	qt-ui/divepicturewidget.h \
-	qt-ui/diveplanner.h \
-	qt-ui/downloadfromdivecomputer.h \
-	qt-ui/globe.h \
-	qt-ui/graphicsview-common.h \
-	qt-ui/kmessagewidget.h \
-	qt-ui/maintab.h \
-	qt-ui/mainwindow.h \
-	qt-ui/modeldelegates.h \
-	qt-ui/models.h \
-	qt-ui/preferences.h \
-	qt-ui/printdialog.h \
-	qt-ui/printlayout.h \
-	qt-ui/printoptions.h \
-	qt-ui/simplewidgets.h \
-	qt-ui/starwidget.h \
-	qt-ui/subsurfacewebservices.h \
-	qt-ui/tableview.h \
+#	qt-ui/about.h \
+#	qt-ui/completionmodels.h \
+#	qt-ui/divecomputermanagementdialog.h \
+#	qt-ui/divelistview.h \
+#	qt-ui/divepicturewidget.h \
+#	qt-ui/diveplanner.h \
+#	qt-ui/downloadfromdivecomputer.h \
+#	qt-ui/globe.h \
+#	qt-ui/graphicsview-common.h \
+#	qt-ui/kmessagewidget.h \
+#	qt-ui/maintab.h \
+#	qt-ui/mainwindow.h \
+#	qt-ui/modeldelegates.h \
+#	qt-ui/models.h \
+#	qt-ui/preferences.h \
+#	qt-ui/printdialog.h \
+#	qt-ui/printlayout.h \
+#	qt-ui/printoptions.h \
+#	qt-ui/simplewidgets.h \
+#	qt-ui/starwidget.h \
+#	qt-ui/subsurfacewebservices.h \
+#	qt-ui/tableview.h \
 	exif.h \
 	sha1.h \
 	statistics.h \
 	subsurfacestartup.h \
 	uemis.h \
 	webservice.h \
-	qt-ui/divelogimportdialog.h \
-	qt-ui/tagwidget.h \
-	qt-ui/groupedlineedit.h \
-	qt-ui/usermanual.h \
-	qt-ui/profile/profilewidget2.h \
-	qt-ui/profile/diverectitem.h \
-	qt-ui/profile/divepixmapitem.h \
-	qt-ui/profile/divelineitem.h \
-	qt-ui/profile/divetextitem.h \
-	qt-ui/profile/animationfunctions.h \
-	qt-ui/profile/divecartesianaxis.h \
-	qt-ui/profile/diveplotdatamodel.h \
-	qt-ui/profile/diveprofileitem.h \
-	qt-ui/profile/diveeventitem.h \
-	qt-ui/profile/divetooltipitem.h \
-	qt-ui/profile/ruleritem.h \
-	qt-ui/updatemanager.h \
-	qt-ui/divelogexportdialog.h \
-	qt-ui/usersurvey.h \
+#	qt-ui/divelogimportdialog.h \
+#	qt-ui/tagwidget.h \
+#	qt-ui/groupedlineedit.h \
+#	qt-ui/usermanual.h \
+#	qt-ui/profile/profilewidget2.h \
+#	qt-ui/profile/diverectitem.h \
+#	qt-ui/profile/divepixmapitem.h \
+#	qt-ui/profile/divelineitem.h \
+#	qt-ui/profile/divetextitem.h \
+#	qt-ui/profile/animationfunctions.h \
+#	qt-ui/profile/divecartesianaxis.h \
+#	qt-ui/profile/diveplotdatamodel.h \
+#	qt-ui/profile/diveprofileitem.h \
+#	qt-ui/profile/diveeventitem.h \
+#	qt-ui/profile/divetooltipitem.h \
+#	qt-ui/profile/ruleritem.h \
+#	qt-ui/updatemanager.h \
+#	qt-ui/divelogexportdialog.h \
+#	qt-ui/usersurvey.h \
 	subsurfacesysinfo.h
 
-android: HEADERS -= \
-	qt-ui/usermanual.h \
-	qt-ui/printdialog.h \
-	qt-ui/printlayout.h \
-	qt-ui/printoptions.h
+#android: HEADERS -= \
+#	qt-ui/usermanual.h \
+#	qt-ui/printdialog.h \
+#	qt-ui/printlayout.h \
+#	qt-ui/printoptions.h
 
 SOURCES =  \
 	deco.c \
@@ -101,42 +102,42 @@ SOURCES =  \
 	divelist.c \
 	equipment.c \
 	file.c \
-	gettextfromc.cpp \
+#	gettextfromc.cpp \
 	libdivecomputer.c \
 	load-git.c \
-	main.cpp \
+#	main.cpp \
 	membuffer.c \
 	parse-xml.c \
 	planner.c \
 	profile.c \
-	divecomputer.cpp \
-	worldmap-save.c \
-	save-html.c \
-	qt-gui.cpp \
-	qthelper.cpp \
-	qt-ui/about.cpp \
-	qt-ui/completionmodels.cpp \
-	qt-ui/divecomputermanagementdialog.cpp \
-	qt-ui/divelistview.cpp \
-	qt-ui/divepicturewidget.cpp \
-	qt-ui/diveplanner.cpp \
-	qt-ui/downloadfromdivecomputer.cpp \
-	qt-ui/globe.cpp \
-	qt-ui/graphicsview-common.cpp \
-	qt-ui/kmessagewidget.cpp \
-	qt-ui/maintab.cpp \
-	qt-ui/mainwindow.cpp \
-	qt-ui/modeldelegates.cpp \
-	qt-ui/models.cpp \
-	qt-ui/preferences.cpp \
-	qt-ui/printdialog.cpp \
-	qt-ui/printlayout.cpp \
-	qt-ui/printoptions.cpp \
-	qt-ui/simplewidgets.cpp \
-	qt-ui/starwidget.cpp \
-	qt-ui/subsurfacewebservices.cpp \
-	qt-ui/tableview.cpp \
-	exif.cpp \
+#	divecomputer.cpp \
+#	worldmap-save.c \
+#	save-html.c \
+#	qt-gui.cpp \
+#	qthelper.cpp \
+#	qt-ui/about.cpp \
+#	qt-ui/completionmodels.cpp \
+#	qt-ui/divecomputermanagementdialog.cpp \
+#	qt-ui/divelistview.cpp \
+#	qt-ui/divepicturewidget.cpp \
+#	qt-ui/diveplanner.cpp \
+#	qt-ui/downloadfromdivecomputer.cpp \
+#	qt-ui/globe.cpp \
+#	qt-ui/graphicsview-common.cpp \
+#	qt-ui/kmessagewidget.cpp \
+#	qt-ui/maintab.cpp \
+#	qt-ui/mainwindow.cpp \
+#	qt-ui/modeldelegates.cpp \
+#	qt-ui/models.cpp \
+#	qt-ui/preferences.cpp \
+#	qt-ui/printdialog.cpp \
+#	qt-ui/printlayout.cpp \
+#	qt-ui/printoptions.cpp \
+#	qt-ui/simplewidgets.cpp \
+#	qt-ui/starwidget.cpp \
+#	qt-ui/subsurfacewebservices.cpp \
+#	qt-ui/tableview.cpp \
+#	exif.cpp \
 	save-git.c \
 	save-xml.c \
 	sha1.c \
@@ -146,60 +147,62 @@ SOURCES =  \
 	time.c \
 	uemis.c \
 	uemis-downloader.c \
-	qt-ui/divelogimportdialog.cpp \
-	qt-ui/tagwidget.cpp \
-	qt-ui/groupedlineedit.cpp \
-	qt-ui/usermanual.cpp \
-	qt-ui/profile/profilewidget2.cpp \
-	qt-ui/profile/diverectitem.cpp \
-	qt-ui/profile/divepixmapitem.cpp \
-	qt-ui/profile/divelineitem.cpp \
-	qt-ui/profile/divetextitem.cpp \
-	qt-ui/profile/animationfunctions.cpp \
-	qt-ui/profile/divecartesianaxis.cpp \
-	qt-ui/profile/diveplotdatamodel.cpp \
-	qt-ui/profile/diveprofileitem.cpp \
-	qt-ui/profile/diveeventitem.cpp \
-	qt-ui/profile/divetooltipitem.cpp \
-	qt-ui/profile/ruleritem.cpp \
-	qt-ui/updatemanager.cpp \
-	qt-ui/divelogexportdialog.cpp \
-	qt-ui/usersurvey.cpp \
-	subsurfacesysinfo.cpp
+#	qt-ui/divelogimportdialog.cpp \
+#	qt-ui/tagwidget.cpp \
+#	qt-ui/groupedlineedit.cpp \
+#	qt-ui/usermanual.cpp \
+#	qt-ui/profile/profilewidget2.cpp \
+#	qt-ui/profile/diverectitem.cpp \
+#	qt-ui/profile/divepixmapitem.cpp \
+#	qt-ui/profile/divelineitem.cpp \
+#	qt-ui/profile/divetextitem.cpp \
+#	qt-ui/profile/animationfunctions.cpp \
+#	qt-ui/profile/divecartesianaxis.cpp \
+#	qt-ui/profile/diveplotdatamodel.cpp \
+#	qt-ui/profile/diveprofileitem.cpp \
+#	qt-ui/profile/diveeventitem.cpp \
+#	qt-ui/profile/divetooltipitem.cpp \
+#	qt-ui/profile/ruleritem.cpp \
+#	qt-ui/updatemanager.cpp \
+#	qt-ui/divelogexportdialog.cpp \
+#	qt-ui/usersurvey.cpp \
+#	subsurfacesysinfo.cpp
 
-android: SOURCES += android.cpp
-else: linux*: SOURCES += linux.c
+
+#android: SOURCES += android.cpp
+#else:
+linux*: SOURCES += linux.c
 mac: SOURCES += macos.c
 win32: SOURCES += windows.c
 
-android: SOURCES -= \
-	qt-ui/usermanual.cpp \
-	qt-ui/printdialog.cpp \
-	qt-ui/printlayout.cpp \
-	qt-ui/printoptions.cpp
-
-FORMS = \
-	qt-ui/about.ui \
-	qt-ui/divecomputermanagementdialog.ui \
-	qt-ui/diveplanner.ui \
-	qt-ui/downloadfromdivecomputer.ui \
-	qt-ui/maintab.ui \
-	qt-ui/mainwindow.ui \
-	qt-ui/preferences.ui \
-	qt-ui/printoptions.ui \
-	qt-ui/renumber.ui \
-	qt-ui/shifttimes.ui \
-	qt-ui/shiftimagetimes.ui \
-	qt-ui/webservices.ui \
-	qt-ui/tableview.ui \
-	qt-ui/divelogimportdialog.ui \
-	qt-ui/searchbar.ui \
-	qt-ui/divelogexportdialog.ui \
-	qt-ui/plannerSettings.ui \
-	qt-ui/usersurvey.ui
-
-# Nether usermanual or printing is supported on android right now
-android: FORMS -= qt-ui/printoptions.ui
+#android: SOURCES -= \
+#	qt-ui/usermanual.cpp \
+#	qt-ui/printdialog.cpp \
+#	qt-ui/printlayout.cpp \
+#	qt-ui/printoptions.cpp
+#
+#FORMS = \
+#	qt-ui/about.ui \
+#	qt-ui/divecomputermanagementdialog.ui \
+#	qt-ui/diveplanner.ui \
+#	qt-ui/downloadfromdivecomputer.ui \
+#	qt-ui/maintab.ui \
+#	qt-ui/mainwindow.ui \
+#	qt-ui/preferences.ui \
+#	qt-ui/printoptions.ui \
+#	qt-ui/renumber.ui \
+#	qt-ui/shifttimes.ui \
+#	qt-ui/shiftimagetimes.ui \
+#	qt-ui/webservices.ui \
+#	qt-ui/tableview.ui \
+#	qt-ui/divelogimportdialog.ui \
+#	qt-ui/searchbar.ui \
+#	qt-ui/divelogexportdialog.ui \
+#	qt-ui/plannerSettings.ui \
+#	qt-ui/usersurvey.ui
+#
+## Nether usermanual or printing is supported on android right now
+#android: FORMS -= qt-ui/printoptions.ui
 
 RESOURCES = subsurface.qrc
 
