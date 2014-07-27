@@ -38,6 +38,7 @@ HEADERS = \
 	profile.h \
 	qt-gui.h \
 	qthelper.h \
+	help.h \
 	units.h \
 	divecomputer.h \
 #	qt-ui/about.h \
@@ -116,6 +117,7 @@ SOURCES =  \
 #	save-html.c \
 #	qt-gui.cpp \
 #	qthelper.cpp \
+	help.c \
 #	qt-ui/about.cpp \
 #	qt-ui/completionmodels.cpp \
 #	qt-ui/divecomputermanagementdialog.cpp \
