@@ -3,6 +3,7 @@
 #include "dive.h"
 #include "display.h"
 #include "membuffer.h"
+#include "getline.h"
 #include <string.h>
 #include <sys/types.h>
 #include <dirent.h>

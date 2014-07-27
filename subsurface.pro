@@ -110,6 +110,7 @@ SOURCES =  \
 	parse-xml.c \
 	planner.c \
 	profile.c \
+	getline.c \
 #	divecomputer.cpp \
 #	worldmap-save.c \
 #	save-html.c \
