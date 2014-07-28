@@ -4,6 +4,7 @@
 #include "file.h"
 #include <regex.h>
 #include <libxslt/documents.h>
+#include <libexif/exif-data.h>
 
 #define translate(_context, arg) trGettext(arg)
 
@@ -434,25 +435,91 @@ xsltStylesheetPtr get_stylesheet(const char *name)
 	return xslt;
 }
 
-/*
+static timestamp_t get_epoch_from_exif(ExifEntry *tstamp, ExifEntry *dstamp)
+{
+	struct tm tm;
+	int year = 0, month = 0, day = 0;
+	int hour = 0, min = 0, sec = 0, csec = 0;
+	if (tstamp)
+		sscanf(tstamp->data, "%d:%d:%d.%d", &hour, &min, &sec, &csec);
+	if (dstamp)
+		sscanf(dstamp->data, "%d:%d:%d", &year, &month, &day);
+	tm.tm_year = year;
+	tm.tm_mon = month - 1;
+	tm.tm_mday = day;
+	tm.tm_hour = hour;
+	tm.tm_min = min;
+	tm.tm_sec = sec;
+	return (utc_mktime(&tm));
+}
+
+static int get_int_str(const char *str, int len)
+{
+	char *s = (char *) str;
+	int ret = 0;
+	int i, x;
+	for (i = 0; i < len; i++) {
+		x = s[i];
+		x &= 0xFF;
+		x = x << (8 * (len -1 - i));
+		ret += x;
+	}
+	return ret;
+}
+
+static int  get_latlon_from_exif(ExifEntry *latlon, ExifEntry *latlonref)
+{
+	char buf[64];
+	if (latlon) {
+		float ndeg = (float) get_int_str(latlon->data, 4);
+		float ddeg = (float) get_int_str(latlon->data + 4, 4);
+		float nmin = (float) get_int_str(latlon->data + 8, 4);
+		float dmin = (float) get_int_str(latlon->data + 12, 4);
+		float nsec = (float) get_int_str(latlon->data + 16, 4);
+		float dsec = (float) get_int_str(latlon->data + 20, 4);
+		double flat = (ndeg / ddeg) + (nmin / dmin) / 60 + (nsec / dsec) / 3600;
+		char dir = latlonref->data[0];
+		switch (dir) {
+		case 'S':
+		case 'W':
+			flat *= -1;
+			break;
+		}
+		return lrint(1000000.0 * flat);
+	} else {
+		return 0;
+	}
+}
+
 void picture_load_exif_data(struct picture *p, timestamp_t *timestamp)
 {
-	EXIFInfo exif;
-	memblock mem;
+	ExifData *ed;
+	struct memblock mem;
+	ExifEntry *lat, *lon, *latref, *lonref, *dstamp, *tstamp;
 
 	if (readfile(p->filename, &mem) <= 0)
 		goto picture_load_exit;
-	if (exif.parseFrom((const unsigned char *)mem.buffer, (unsigned)mem.size) != PARSE_EXIF_SUCCESS)
+	ed = exif_data_new_from_data((unsigned char *) mem.buffer, (unsigned int) mem.size);
+
+	if (!ed)
 		goto picture_load_exit;
-	*timestamp = exif.epoch();
-	p->longitude.udeg= lrint(1000000.0 * exif.GeoLocation.Longitude);
-	p->latitude.udeg  = lrint(1000000.0 * exif.GeoLocation.Latitude);
+	tstamp = exif_data_get_entry(ed, EXIF_TAG_GPS_TIME_STAMP);
+	dstamp = exif_data_get_entry(ed, EXIF_TAG_GPS_DATE_STAMP);
+	*timestamp = get_epoch_from_exif(tstamp, dstamp);
+
+	lat = exif_data_get_entry(ed, EXIF_TAG_GPS_LATITUDE);
+	latref = exif_data_get_entry(ed, EXIF_TAG_GPS_LATITUDE_REF);
+	p->latitude.udeg = get_latlon_from_exif(lat, latref);
+
+	lon = exif_data_get_entry(ed, EXIF_TAG_GPS_LONGITUDE);
+	lonref = exif_data_get_entry(ed, EXIF_TAG_GPS_LONGITUDE_REF);
+	p->longitude.udeg = get_latlon_from_exif(lon, lonref);
 
 picture_load_exit:
+	exif_data_free(ed);
 	free(mem.buffer);
 	return;
 }
-*/
 
 const char *get_file_name(const char *fileName)
 {

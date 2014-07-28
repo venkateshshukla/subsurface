@@ -161,6 +161,10 @@ libgit21-api {
 win32: console {
 	DEFINES += WIN32_CONSOLE_APP
 }
+
+android {
+	LIBS += -lexif
+}
 #
 # Platform-specific changes
 #
