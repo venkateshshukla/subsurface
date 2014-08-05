@@ -71,5 +71,5 @@ LOCAL_C_INCLUDES += $(INCLUDE_PATH)/../lib/libzip/include
 LOCAL_CFLAGS := -std=gnu99
 LOCAL_WHOLE_STATIC_LIBRARIES := libsqlite libz libzip libexslt libxslt libxml
 LOCAL_WHOLE_STATIC_LIBRARIES += libgit libexif libusb libftdi libdivecomputer
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
 
