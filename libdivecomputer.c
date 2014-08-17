@@ -777,7 +777,7 @@ const char *do_libdivecomputer_import(device_data_t *data)
 	}
 
 	err = translate("gettextFromC", "Unable to open %s %s (%s)");
-	rc = dc_device_open(&data->device, data->context, data->descriptor, data->devname);
+	rc = dc_device_open(&data->device, data->context, data->descriptor, data->devparam);
 	if (rc == DC_STATUS_SUCCESS) {
 		err = do_device_import(data);
 		/* TODO: Show the logfile to the user on error. */
