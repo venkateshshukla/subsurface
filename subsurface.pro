@@ -339,6 +339,9 @@ android_jni {
 	INCLUDEPATH -= qt-ui $$PWD
 	DEPENDPATH -= qt-ui
 
+	HEADERS += divecomputer_android.h
+	SOURCES += divecomputer_android.c linux.c
+
 	HEADERS -= \
 		save-html.h \
 		worldmap-save.h \
@@ -384,8 +387,6 @@ android_jni {
 		qt-ui/updatemanager.h \
 		qt-ui/divelogexportdialog.h \
 		qt-ui/usersurvey.h
-
-	SOURCES += linux.c
 
 	SOURCES -= \
 		gettextfromc.cpp \
