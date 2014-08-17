@@ -12,6 +12,10 @@
 #include <unistd.h>
 #include <pwd.h>
 
+#ifdef INCLUDE_GETLINE
+#include "getline.h"
+#endif
+
 const char system_divelist_default_font[] = "Sans";
 const int system_divelist_default_font_size = 8;
 

@@ -339,8 +339,8 @@ android_jni {
 	INCLUDEPATH -= qt-ui $$PWD
 	DEPENDPATH -= qt-ui
 
-	HEADERS += divecomputer_android.h
-	SOURCES += divecomputer_android.c linux.c
+	HEADERS += divecomputer_android.h getline.h
+	SOURCES += divecomputer_android.c linux.c getline.c
 
 	HEADERS -= \
 		save-html.h \
