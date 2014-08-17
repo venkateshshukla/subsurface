@@ -340,7 +340,8 @@ android_jni {
 	DEPENDPATH -= qt-ui
 
 	HEADERS += divecomputer_android.h getline.h
-	SOURCES += divecomputer_android.c linux.c getline.c gettext.c
+	SOURCES += divecomputer_android.c linux.c getline.c gettext.c \
+		androidhelper.c
 
 	HEADERS -= \
 		save-html.h \
